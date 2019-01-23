@@ -6,11 +6,11 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:12:53 by llejeune          #+#    #+#             */
-/*   Updated: 2018/12/14 14:58:34 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/23 15:49:34 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static int		sizeline(char *tmp)
 {

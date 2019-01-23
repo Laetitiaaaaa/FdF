@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/01/23 15:46:52 by llejeune         ###   ########.fr        #
+#    Updated: 2019/01/23 15:52:22 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C ./libft
-	cc $(FLAG1) $(SRC) $(FLAG2)
+	cc $(FLAG1) $(SRC) $(FLAG2) -o $(NAME)
 
 clean:
 	make fclean -C ./libft
