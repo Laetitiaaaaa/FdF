@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/23 15:50:47 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/23 19:27:09 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 # include <mlx.h>
 # include "libft/libft.h"
 
-/*typedef struct		s_point
+typedef struct		s_point
 {
 	float			x;
 	float			y;
 	float			z;
 }					t_point;
 
-typedef struct		s_list
+typedef struct		s_liste
 {
-	t_point			*point;
-	struct s_list	*next;
-}					t_list;*/
+	t_point			point;
+	struct s_liste	*next;
+}					t_v3;
 
 typedef struct		s
 {
@@ -38,12 +38,14 @@ typedef struct		s
 	int				s_l;
 	int				endian;
 	char			*str;
+	int				i;
+	int				c;
 }					my_m;
 
-//t_list				*ft_new_node(t_list *new_node);
-//void				ft_add_node(t_list **alst, t_list *new_node);
-//void				ft_map(int *fd);
+t_v3				*ft_new_node(t_v3 *new_node);
+void				ft_add_node(t_v3 **alst, t_v3 *new_node);
+void				ft_map(int *fd, t_v3 **lst_point, my_m *m);
 void				ft_fill_pixel(my_m *m, int x, int y);
-//void				ft_fill_image(t_list **alst);
+void				ft_fill_image(t_v3 **alst, my_m *m);
 
 #endif

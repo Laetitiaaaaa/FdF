@@ -6,16 +6,18 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/23 15:51:20 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/23 20:16:35 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "fdf.h"
+#include <stdio.h>
 
-/*t_list	*ft_new_node(t_list *new_node)
+t_v3	*ft_new_node(t_v3 *new_node)
 {
-	if (!(new_node = (t_list *)malloc(sizeof(t_list))))
+	printf("c\n");
+	if (!(new_node = malloc(sizeof(t_v3))))
 		return (0);
 	new_node->point.x = 0;
 	new_node->point.y = 0;
@@ -24,52 +26,57 @@
 	return (new_node);
 }
 
-void	ft_add_node(t_list **alst, t_list *new_node)
+void	ft_add_node(t_v3 **alst, t_v3 *new_node)
 {
-	t_list	*keep;
+	t_v3	*keep;
 
+	printf("b\n");
 	keep = (*alst);
+	printf("ahhhhh\n");
 	if (keep != NULL && new_node != NULL)
 	{
+		printf("non\n");
 		while (keep->next != NULL)
 			keep = keep->next;
 		keep->next = new_node;
 	}
-	else if ((*alst) == NULL)
+	if ((*alst) == NULL)
 	{
+		printf("arg\n");
 		(*alst) = new_node;
 	}
+	printf("bla\n");
 }
 
-void	ft_map(int *fd)
+void	ft_map(int *fd, t_v3 **lst_point, my_m *m)
 {
-	int		i;
-	int		c;
-	char	**line;
+	char	*line;
 	char	**tmp;
-	t_list	*new_node;
-	t_list	**lst_point;
+	t_v3	*new_node;
 
-	*lst_point = NULL;
+	printf("d\n");
+	if (!(line = (char *)malloc(sizeof(char) * 100)))
+		return ;
 	if (fd < 0)
 		return ;
-	c = 0;
-	while (get_next_line(*fd, line) > 0)
+	printf("d\n");
+	m->c = 0;
+	while (get_next_line(*fd, &line) > 0)
 	{
 		tmp = ft_strsplit(line, ' ');
-		i = 0;
-		while (*tmp[i] != 0)
+		m->i = 0;
+		while (*tmp[m->i] != 0)
 		{
 			new_node = ft_new_node(new_node);
-			new_node->point.x = i;
-			new_node->point.y = c;
-			new_node->point.z = ((int)*tmp)[i] - 48;
+			new_node->point.x = m->i;
+			new_node->point.y = m->c;
+			new_node->point.z = ft_atoi(tmp[m->i]);
 			ft_add_node(lst_point, new_node);
-			i++;
+			m->i++;
 		}
-		c++;
+		m->c++;
 	}
-}*/
+}
 
 void	ft_fill_pixel(my_m *m, int x, int y)
 {
@@ -82,31 +89,44 @@ void	ft_fill_pixel(my_m *m, int x, int y)
 	m->str[pixel + 3] = 0;
 }
 
-/*void	ft_fill_image(t_list **alst)
+void	ft_fill_image(t_v3 **alst, my_m *m)
 {
 	while ((*alst) != NULL)
 	{
+		printf("a\n");
 		ft_fill_pixel(m, (*alst)->point.x, (*alst)->point.y);
 		(*alst) = (*alst)->next;
 	}
-}*/
+}
 
 int		main(int ac, char **av)
 {
 	my_m	m;
-//	int		fd;
-//	t_list	**lst_point;
+	int		fd;
+	t_v3	**lst_point;
 
 	(void)av;
 	ac = 2;
-//	fd = (av[1], O_RDONLY);
+	lst_point = NULL;
+	printf("A\n");
+	fd = open(av[1], O_RDONLY);
+	printf("B\n");
 	m.mlx_ptr = mlx_init();
+	printf("C\n");
 	m.win_ptr = mlx_new_window(m.mlx_ptr, 800, 600, "FdF");
+	printf("D\n");
 	m.img_ptr = mlx_new_image(m.mlx_ptr, 800, 600);
+	printf("E\n");
 	m.str = mlx_get_data_addr(m.img_ptr, &(m.bpp), &(m.s_l), &(m.endian));
-//	ft_fill_imge(lst_point);
-	ft_fill_pixel(&m, 400, 300);
+	printf("F\n");
+	ft_map(&fd, lst_point, &m);
+	printf("F\n");
+	ft_fill_image(lst_point, &m);
+	printf("G\n");
+//	ft_fill_pixel(&m, 400, 300);
 	mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.img_ptr, 0, 0);
+	printf("H\n");
 	mlx_loop(m.mlx_ptr);
+	printf("I\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 08:45:33 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/22 17:29:47 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/23 19:40:19 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <fcntl.h>
 
 typedef struct		s_list
 {

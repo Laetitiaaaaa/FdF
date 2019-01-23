@@ -6,30 +6,37 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/01/23 15:52:22 by llejeune         ###   ########.fr        #
+#    Updated: 2019/01/23 17:53:40 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = fdf.c \
+SRC = fdf.c
 
-FLAG1 = -I /usr/local/include
+OBJ = $(SRC:.c=.o)
 
-FLAG2 = -L /usr/local/lib/ \
+FLAG1 = -Wall -Wextra -Werror
+
+FLAG2 = -I /usr/local/include
+
+FLAG3 = -L /usr/local/lib/ \
 		 -lmlx \
 		 -framework OpenGL \
 		 -framework AppKit \
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	make -C ./libft
-	cc $(FLAG1) $(SRC) $(FLAG2) -o $(NAME)
+	cc $(FLAG2) $(OBJ) libft/libft.a $(FLAG3) -o $(NAME)
+
+%.o: %.c
+	gcc $(FLAG1) -o $@ -c $<
 
 clean:
 	make fclean -C ./libft
-	rm -rf $(NAME).dSYM
+	rm -rf $(OBJ)
 
 fclean: clean
 	rm $(NAME)
