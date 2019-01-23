@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/23 11:44:22 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/23 14:47:25 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ typedef struct		s
 	int				s_l;
 	int				endian;
 	char			*str;
-	int				x;
-	int				y;
 }					my_m;
+
+t_list				*ft_new_node(t_list *new_node);
+void				ft_add_node(t_list **alst, t_list *new_node);
+void				ft_map(int *fd);
+void				ft_fill_pixel(my_m *m, int x, int y);
+void				ft_fill_image(t_list **alst);
 
 #endif
