@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/25 15:33:08 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/25 19:17:15 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,9 @@ void	ft_map(int *fd, my_m *m)
 	}
 }
 
-void	ft_zoom(t_v3 **lst_point, my_m *m, float i)
-{
-	t_v3 *keep;
-
-	keep = (*lst_point);
-	while (keep != NULL)
-	{
-		keep->point.x = keep->point.x * i;
-		keep->point.y = keep->point.y * i;
-		keep->point.z = keep->point.z * i;
-		keep = keep->next;
-	}
-	ft_always(m);
-}
-
 int		main(int ac, char **av)
 {
 	my_m	m;
-	mat		s;
 	int		fd;
 
 	ac = 2;

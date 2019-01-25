@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/01/25 15:02:58 by llejeune         ###   ########.fr        #
+#    Updated: 2019/01/25 19:13:22 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = fdf
 SRC = fdf.c \
 	  image.c \
 	  list.c \
+	  matrice.c \
 
 OBJ = $(SRC:.c=.o)
 

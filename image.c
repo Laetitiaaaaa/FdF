@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:01:10 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/25 15:18:14 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/25 19:25:01 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	ft_fill_image(t_v3 **alst, my_m *m)
 	}
 }
 
-int		ft_key(int key, my_m *m, mat *s)
+int		ft_key(int key, my_m *m)
 {
 	if (key == F_H)
-		ft_zoom(&m->lst_point, m, s, 2);
+		ft_zoom(&m->lst_point, m, 2);
 	if (key == F_B)
-		ft_zoom(&m->lst_point, m, s, 0.5);
+		ft_zoom(&m->lst_point, m, 0.5);
 	if (key == ESC)
 		exit(0);
 	return (1);
