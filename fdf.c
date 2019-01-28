@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/25 19:17:15 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:04:53 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_map(int *fd, my_m *m)
 	char	**tmp;
 	t_v3	*new_node;
 
-	if (!(line = (char *)malloc(sizeof(char) * 100)))
+	if (!(line = (char *)malloc(sizeof(char) * (m->l + 1))))
 		return ;
 	if (fd < 0)
 		return ;
@@ -46,16 +46,25 @@ int		main(int ac, char **av)
 	int		fd;
 
 	ac = 2;
+	m.l = 800;
+	m.h = 600;
 	m.lst_point = NULL;
 	fd = open(av[1], O_RDONLY);
 	m.mlx_ptr = mlx_init();
-	m.win_ptr = mlx_new_window(m.mlx_ptr, 800, 600, "FdF");
-	m.img_ptr = mlx_new_image(m.mlx_ptr, 800, 600);
+	m.win_ptr = mlx_new_window(m.mlx_ptr, m.l, m.h, "FdF");
+	m.img_ptr = mlx_new_image(m.mlx_ptr, m.l, m.h);
+	printf("A\n");
 	m.str = mlx_get_data_addr(m.img_ptr, &(m.bpp), &(m.s_l), &(m.endian));
+	printf("B\n");
 	ft_map(&fd, &m);
+	printf("C\n");
 	ft_fill_image(&m.lst_point, &m);
-	mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.img_ptr, 400, 300);
+	printf("D\n");
+	mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.img_ptr, 0, 0);
+	printf("E\n");
 	mlx_key_hook(m.win_ptr, ft_key, &m);
+	printf("F\n");
 	mlx_loop(m.mlx_ptr);
+	printf("G\n");
 	return (0);
 }

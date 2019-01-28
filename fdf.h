@@ -6,13 +6,15 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/25 20:40:54 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:04:30 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # define ESC 53
+# define P 69
+# define M 78
 # define F_H 126
 # define F_B 125
 # define F_G 123
@@ -29,26 +31,26 @@ typedef struct		s_point
 	float			z;
 }					t_point;
 
-/*typedef struct		s_color
+typedef struct		s_color
 {
 	unsigned char	blue;
 	unsigned char	green;
 	unsigned char	red;
 	unsigned char	alpha;
 }					t_color;
-*/
+
 typedef struct		s_liste
 {
 	t_point			point;
 	t_point			save;
-//	t_color			c;
+	t_color			c;
 	struct s_liste	*next;
 }					t_v3;
 
 typedef struct		m
 {
-	int				tab[3][3];
-}					mat;
+	float			tab[3][3];
+}					matrice;
 
 typedef struct		s
 {
@@ -59,11 +61,14 @@ typedef struct		s
 	int				s_l;
 	int				endian;
 	char			*str;
+	int				h;
+	int				l;
 	int				i;
 	int				c;
+	t_color			color;
 	t_v3			*lst_point;
-	mat				mat;
-	mat				mat1;
+	matrice			mat;
+	matrice			trans;
 }					my_m;
 
 t_v3				*ft_new_node(t_v3 *new_node);
@@ -74,7 +79,9 @@ void				ft_fill_image(t_v3 **alst, my_m *m);
 int					ft_key(int key, my_m *m);
 void				ft_zoom(t_v3 **lst_point, my_m *m, float i);
 void				ft_always(my_m *m);
-void				ft_mult_1_3(t_v3 **alst, mat *mat);
-mat					ft_mult_3_3(mat *mat, mat *mat1);
+void				ft_mult_1_3(t_v3 **alst, matrice *mat);
+matrice				ft_mult_3_3(matrice *mat, matrice *mat1);
+void				ft_color(float z, my_m *m);
+void				ft_translation(my_m *m, float x, float y, float z);
 
 #endif

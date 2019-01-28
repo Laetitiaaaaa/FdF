@@ -6,13 +6,13 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:05:02 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/25 20:40:45 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:04:21 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_zoom(t_v3 **lst_point, my_m *m, float i)
+void		ft_zoom(t_v3 **lst_point, my_m *m, float i)
 {
 	t_v3 *keep;
 
@@ -26,7 +26,7 @@ void	ft_zoom(t_v3 **lst_point, my_m *m, float i)
 	m->mat.tab[2][0] = 0;
 	m->mat.tab[2][1] = 0;
 	m->mat.tab[2][2] = i;
-	while (keep != NULL)
+	while (keep != NULL && keep->point.x < m->l && keep->point.y < m->h)
 	{
 		ft_mult_1_3(&keep, &m->mat);
 		keep = keep->next;
@@ -34,23 +34,43 @@ void	ft_zoom(t_v3 **lst_point, my_m *m, float i)
 	ft_always(m);
 }
 
-mat		ft_mult_3_3(mat *mat, mat *mat1)
-{
-	mat		new;
+//void		ft_rotation()
 
-	new[0][0] = mat->tab[0][0] * mat1->tab[0][0] + mat->tab[0][1] * mat1->tab[1][0] + mat->tab[0][2] * mat1->tab[2][0];
-	new[0][1] = mat->tab[0][0] * mat1->tab[0][1] + mat->tab[0][1] * mat1->tab[1][1] + mat->tab[0][2] * mat1->tab[1][2];
-	new[0][2] = mat->tab[0][0] * mat1->tab[0][2] + mat->tab[0][1] * mat1->tab[1][2] + mat->tab[0][2] * mat1->tab[2][2];
-	new[1][0] = mat->tab[1][0] * mat1->tab[0][0] + mat->tab[1][1] * mat1->tab[1][0] + mat->tab[1][2] * mat1->tab[2][0];
-	new[1][1] = mat->tab[1][0] * mat1->tab[0][1] + mat->tab[1][1] * mat1->tab[1][1] + mat->tab[1][2] * mat1->tab[2][0];
-	new[1][2] = mat->tab[1][0] * mat1->tab[0][2] + mat->tab[1][1] * mat1->tab[1][2] + mat->tab[1][2] * mat1->tab[2][2];
-	new[2][0] = mat->tab[2][0] * mat1->tab[0][0] + mat->tab[2][1] * mat1->tab[1][0] + mat->tab[2][2] * mat1->tab[2][0];
-	new[2][1] = mat->tab[2][0] * mat1->tab[0][1] + mat->tab[2][1] * mat1->tab[1][1] + mat->tab[2][2] * mat1->tab[2][0];
-	new[2][2] = mat->tab[2][0] * mat1->tab[0][2] + mat->tab[2][1] * mat1->tab[1][2] + mat->tab[2][2] * mat1->tab[2][2];
+void		ft_translation(my_m *m, float x, float y, float z)
+{
+	t_v3	*keep;
+
+	keep = m->lst_point;
+	if (keep != NULL)
+	{
+		while (keep != NULL)
+		{
+			keep->point.x = keep->point.x + x;
+			keep->point.y = keep->point.y + y;
+			keep->point.z = keep->point.z + z;
+			keep = keep->next;
+		}
+		ft_always(m);
+	}
+}
+
+matrice		ft_mult_3_3(matrice *mat, matrice *mat1)
+{
+	matrice		new;
+
+	new.tab[0][0] = mat->tab[0][0] * mat1->tab[0][0] + mat->tab[0][1] * mat1->tab[1][0] + mat->tab[0][2] * mat1->tab[2][0];
+	new.tab[0][1] = mat->tab[0][0] * mat1->tab[0][1] + mat->tab[0][1] * mat1->tab[1][1] + mat->tab[0][2] * mat1->tab[1][2];
+	new.tab[0][2] = mat->tab[0][0] * mat1->tab[0][2] + mat->tab[0][1] * mat1->tab[1][2] + mat->tab[0][2] * mat1->tab[2][2];
+	new.tab[1][0] = mat->tab[1][0] * mat1->tab[0][0] + mat->tab[1][1] * mat1->tab[1][0] + mat->tab[1][2] * mat1->tab[2][0];
+	new.tab[1][1] = mat->tab[1][0] * mat1->tab[0][1] + mat->tab[1][1] * mat1->tab[1][1] + mat->tab[1][2] * mat1->tab[2][0];
+	new.tab[1][2] = mat->tab[1][0] * mat1->tab[0][2] + mat->tab[1][1] * mat1->tab[1][2] + mat->tab[1][2] * mat1->tab[2][2];
+	new.tab[2][0] = mat->tab[2][0] * mat1->tab[0][0] + mat->tab[2][1] * mat1->tab[1][0] + mat->tab[2][2] * mat1->tab[2][0];
+	new.tab[2][1] = mat->tab[2][0] * mat1->tab[0][1] + mat->tab[2][1] * mat1->tab[1][1] + mat->tab[2][2] * mat1->tab[2][0];
+	new.tab[2][2] = mat->tab[2][0] * mat1->tab[0][2] + mat->tab[2][1] * mat1->tab[1][2] + mat->tab[2][2] * mat1->tab[2][2];
 	return (new);
 }
 
-void	ft_mult_1_3(t_v3 **alst, mat *mat)
+void	ft_mult_1_3(t_v3 **alst, matrice *mat)
 {
 	(*alst)->save.x = (*alst)->point.x;
 	(*alst)->save.y = (*alst)->point.y;
