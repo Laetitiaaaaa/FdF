@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/28 16:04:30 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/29 09:18:22 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@
 # define F_B 125
 # define F_G 123
 # define F_D 124
+# define TWO 84
+# define FIVE 87
+# define FOUR 86
+# define SIX 88
+# define EIGHT 91
 
 # include <mlx.h>
+# include <math.h>
 # include "libft/libft.h"
 # include <stdio.h>
 
@@ -65,10 +71,9 @@ typedef struct		s
 	int				l;
 	int				i;
 	int				c;
-	t_color			color;
 	t_v3			*lst_point;
 	matrice			mat;
-	matrice			trans;
+	matrice			rot;
 }					my_m;
 
 t_v3				*ft_new_node(t_v3 *new_node);
@@ -83,5 +88,6 @@ void				ft_mult_1_3(t_v3 **alst, matrice *mat);
 matrice				ft_mult_3_3(matrice *mat, matrice *mat1);
 void				ft_color(float z, my_m *m);
 void				ft_translation(my_m *m, float x, float y, float z);
+void				ft_rotation_x(float angle, my_m *m);
 
 #endif

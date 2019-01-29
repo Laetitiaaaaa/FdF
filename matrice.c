@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:05:02 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/28 16:04:21 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/29 09:18:26 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,27 @@ void		ft_zoom(t_v3 **lst_point, my_m *m, float i)
 	ft_always(m);
 }
 
-//void		ft_rotation()
+void		ft_rotation_x(float angle, my_m *m)
+{
+	t_v3	*keep;
+
+	keep = m->lst_point;
+	m->rot.tab[0][0] = 1;
+	m->rot.tab[0][1] = 0;
+	m->rot.tab[0][2] = 0;
+	m->rot.tab[1][0] = 0;
+	m->rot.tab[1][1] = cos(angle);
+	m->rot.tab[1][2] = -sin(angle);
+	m->rot.tab[2][0] = 0;
+	m->rot.tab[2][1] = sin(angle);
+	m->rot.tab[2][2] = cos(angle);
+	while (keep != NULL)
+	{
+		ft_mult_1_3(&keep, &m->rot);
+		keep = keep->next;
+	}
+	ft_always(m);
+}
 
 void		ft_translation(my_m *m, float x, float y, float z)
 {
