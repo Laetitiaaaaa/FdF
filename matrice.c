@@ -1,4 +1,5 @@
 /* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   matrice.c                                          :+:      :+:    :+:   */
@@ -6,7 +7,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:05:02 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/29 09:18:26 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/29 11:58:51 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +27,7 @@ void		ft_zoom(t_v3 **lst_point, my_m *m, float i)
 	m->mat.tab[2][0] = 0;
 	m->mat.tab[2][1] = 0;
 	m->mat.tab[2][2] = i;
-	while (keep != NULL && keep->point.x < m->l && keep->point.y < m->h)
+	while (keep != NULL)
 	{
 		ft_mult_1_3(&keep, &m->mat);
 		keep = keep->next;
@@ -43,11 +44,11 @@ void		ft_rotation_x(float angle, my_m *m)
 	m->rot.tab[0][1] = 0;
 	m->rot.tab[0][2] = 0;
 	m->rot.tab[1][0] = 0;
-	m->rot.tab[1][1] = cos(angle);
-	m->rot.tab[1][2] = -sin(angle);
+	m->rot.tab[1][1] = cos(angle * M_PI / 180);
+	m->rot.tab[1][2] = -sin(angle * M_PI / 180);
 	m->rot.tab[2][0] = 0;
-	m->rot.tab[2][1] = sin(angle);
-	m->rot.tab[2][2] = cos(angle);
+	m->rot.tab[2][1] = sin(angle * M_PI / 180);
+	m->rot.tab[2][2] = cos(angle * M_PI / 180);
 	while (keep != NULL)
 	{
 		ft_mult_1_3(&keep, &m->rot);
@@ -56,22 +57,48 @@ void		ft_rotation_x(float angle, my_m *m)
 	ft_always(m);
 }
 
-void		ft_translation(my_m *m, float x, float y, float z)
+void		ft_rotation_y(float angle, my_m *m)
 {
 	t_v3	*keep;
 
 	keep = m->lst_point;
-	if (keep != NULL)
+	m->rot.tab[0][0] = cos(angle * M_PI / 180);
+	m->rot.tab[0][1] = 0;
+	m->rot.tab[0][2] = sin(angle * M_PI / 180);
+	m->rot.tab[1][0] = 0;
+	m->rot.tab[1][1] = 1;
+	m->rot.tab[1][2] = 0;
+	m->rot.tab[2][0] = -sin(angle * M_PI / 180);
+	m->rot.tab[2][1] = 0;
+	m->rot.tab[2][2] = cos(angle * M_PI / 180);
+	while (keep != NULL)
 	{
-		while (keep != NULL)
-		{
-			keep->point.x = keep->point.x + x;
-			keep->point.y = keep->point.y + y;
-			keep->point.z = keep->point.z + z;
-			keep = keep->next;
-		}
-		ft_always(m);
+		ft_mult_1_3(&keep, &m->rot);
+		keep = keep->next;
 	}
+	ft_always(m);
+}
+
+void		ft_rotation_z(float angle, my_m *m)
+{
+	t_v3	*keep;
+
+	keep = m->lst_point;
+	m->rot.tab[0][0] = cos(angle * M_PI / 180);
+	m->rot.tab[0][1] = -sin(angle * M_PI / 180);
+	m->rot.tab[0][2] = 0;
+	m->rot.tab[1][0] = sin(angle * M_PI / 180);
+	m->rot.tab[1][1] = cos(angle * M_PI / 180);
+	m->rot.tab[1][2] = 0;
+	m->rot.tab[2][0] = 0;
+	m->rot.tab[2][1] = 0;
+	m->rot.tab[2][2] = 1;
+	while (keep != NULL)
+	{
+		ft_mult_1_3(&keep, &m->rot);
+		keep = keep->next;
+	}
+	ft_always(m);
 }
 
 matrice		ft_mult_3_3(matrice *mat, matrice *mat1)

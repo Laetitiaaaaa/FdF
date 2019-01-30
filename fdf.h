@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/29 09:18:22 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/30 17:33:23 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # define FOUR 86
 # define SIX 88
 # define EIGHT 91
+# define SEVEN 89
+# define EIGHT 91
+# define THREE 85
+# define NINE 92
 
 # include <mlx.h>
 # include <math.h>
@@ -74,12 +78,14 @@ typedef struct		s
 	t_v3			*lst_point;
 	matrice			mat;
 	matrice			rot;
+	int				offx;
+	int				offy;
 }					my_m;
 
 t_v3				*ft_new_node(t_v3 *new_node);
 void				ft_add_node(t_v3 **alst, t_v3 *new_node);
 void				ft_map(int *fd, my_m *m);
-void				ft_fill_pixel(my_m *m, float x, float y);
+void				ft_fill_pixel(my_m *m, int x, int y);
 void				ft_fill_image(t_v3 **alst, my_m *m);
 int					ft_key(int key, my_m *m);
 void				ft_zoom(t_v3 **lst_point, my_m *m, float i);
@@ -87,7 +93,8 @@ void				ft_always(my_m *m);
 void				ft_mult_1_3(t_v3 **alst, matrice *mat);
 matrice				ft_mult_3_3(matrice *mat, matrice *mat1);
 void				ft_color(float z, my_m *m);
-void				ft_translation(my_m *m, float x, float y, float z);
 void				ft_rotation_x(float angle, my_m *m);
+void				ft_rotation_y(float angle, my_m *m);
+void				ft_rotation_z(float angle, my_m *m);
 
 #endif

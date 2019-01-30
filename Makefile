@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/01/25 19:13:22 by llejeune         ###   ########.fr        #
+#    Updated: 2019/01/29 13:16:17 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C ./libft
-	cc $(FLAG2) $(OBJ) libft/libft.a $(FLAG3) -o $(NAME)
+	cc -g $(FLAG2) $(OBJ) libft/libft.a $(FLAG3) -o $(NAME)
 
 %.o: %.c
-	gcc $(FLAG1) -o $@ -c $<
+	gcc -g $(FLAG1) -o $@ -c $<
 
 clean:
 	make fclean -C ./libft

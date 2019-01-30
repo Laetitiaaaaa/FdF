@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/29 09:18:28 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:10:36 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_map(int *fd, my_m *m)
 	char	**tmp;
 	t_v3	*new_node;
 
-	if (!(line = (char *)malloc(sizeof(char) * (m->l + 1))))
+	if (!(line = (char *)malloc(sizeof(char) * (m->l * 4 + 1))))
 		return ;
 	if (fd < 0)
 		return ;
@@ -30,9 +30,9 @@ void	ft_map(int *fd, my_m *m)
 		while (tmp[m->i] != 0)
 		{
 			new_node = ft_new_node(new_node);
-			new_node->point.x = m->i;
-			new_node->point.y = m->c;
-			new_node->point.z = ft_atoi(tmp[m->i]);
+			new_node->point.x = m->i * 20;
+			new_node->point.y = m->c * 20;
+			new_node->point.z = ft_atoi(tmp[m->i]) * 20;
 			ft_add_node(&m->lst_point, new_node);
 			m->i++;
 		}
@@ -46,8 +46,10 @@ int		main(int ac, char **av)
 	int		fd;
 
 	ac = 2;
-	m.l = 800;
-	m.h = 600;
+	m.l = 1200;
+	m.h = 800;
+	m.offx = 0;
+	m.offy = 0;
 	m.lst_point = NULL;
 	fd = open(av[1], O_RDONLY);
 	m.mlx_ptr = mlx_init();
@@ -62,7 +64,7 @@ int		main(int ac, char **av)
 	printf("D\n");
 	mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.img_ptr, 0, 0);
 	printf("E\n");
-	mlx_key_hook(m.win_ptr, ft_key, &m);
+	mlx_hook(m.win_ptr, 2, 0, ft_key, &m);
 	printf("F\n");
 	mlx_loop(m.mlx_ptr);
 	printf("G\n");
