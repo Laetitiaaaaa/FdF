@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 15:12:05 by llejeune          #+#    #+#             */
-/*   Updated: 2018/11/21 12:02:09 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/05 10:46:40 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,24 @@ static int		ft_lenword(const char *s, int i, char c)
 
 char			**ft_strsplit(char const *s, char c)
 {
-	int		i;
-	int		j;
-	int		a;
-	char	**tab;
+	t_split		my;
+	char		**tab;
 
 	if (s == 0)
 		return (NULL);
-	i = 0;
-	j = 0;
-	a = ft_word(s, c);
-	if (!(tab = (char **)malloc(sizeof(char *) * (a + 1))))
+	my.i = 0;
+	my.j = 0;
+	my.a = ft_word(s, c);
+	if (!(tab = (char **)malloc(sizeof(char *) * my.a)))
 		return (NULL);
-	while (s[i] != 0 && j < a)
+	while (s[my.i] != 0 && my.j < my.a)
 	{
-		while (s[i] == c)
-			i++;
-		tab[j++] = ft_strsub(s, (unsigned int)i, ft_lenword(s, i, c));
-		i = i + ft_lenword(s, i, c);
+		while (s[my.i] == c)
+			my.i++;
+		tab[my.j] = ft_strsub(s, (unsigned int)my.i, ft_lenword(s, my.i, c));
+		my.i = my.i + ft_lenword(s, my.i, c);
+		my.j++;
 	}
-	tab[j] = NULL;
+	tab[my.j] = NULL;
 	return (tab);
 }

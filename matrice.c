@@ -1,5 +1,4 @@
 /* ************************************************************************** */
-
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   matrice.c                                          :+:      :+:    :+:   */
@@ -7,13 +6,13 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:05:02 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/29 11:58:51 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/04 08:42:34 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		ft_zoom(t_v3 **lst_point, my_m *m, float i)
+void		ft_zoom(t_v3 **lst_point, t_my_m *m, float i)
 {
 	t_v3 *keep;
 
@@ -35,7 +34,7 @@ void		ft_zoom(t_v3 **lst_point, my_m *m, float i)
 	ft_always(m);
 }
 
-void		ft_rotation_x(float angle, my_m *m)
+void		ft_rotation_x(float angle, t_my_m *m)
 {
 	t_v3	*keep;
 
@@ -57,7 +56,7 @@ void		ft_rotation_x(float angle, my_m *m)
 	ft_always(m);
 }
 
-void		ft_rotation_y(float angle, my_m *m)
+void		ft_rotation_y(float angle, t_my_m *m)
 {
 	t_v3	*keep;
 
@@ -79,7 +78,7 @@ void		ft_rotation_y(float angle, my_m *m)
 	ft_always(m);
 }
 
-void		ft_rotation_z(float angle, my_m *m)
+void		ft_rotation_z(float angle, t_my_m *m)
 {
 	t_v3	*keep;
 
@@ -101,28 +100,40 @@ void		ft_rotation_z(float angle, my_m *m)
 	ft_always(m);
 }
 
-matrice		ft_mult_3_3(matrice *mat, matrice *mat1)
+/*t_matrice		ft_mult_3_3(t_matrice *mat, t_matrice *mat1)
 {
-	matrice		new;
+	t_matrice		new;
 
-	new.tab[0][0] = mat->tab[0][0] * mat1->tab[0][0] + mat->tab[0][1] * mat1->tab[1][0] + mat->tab[0][2] * mat1->tab[2][0];
-	new.tab[0][1] = mat->tab[0][0] * mat1->tab[0][1] + mat->tab[0][1] * mat1->tab[1][1] + mat->tab[0][2] * mat1->tab[1][2];
-	new.tab[0][2] = mat->tab[0][0] * mat1->tab[0][2] + mat->tab[0][1] * mat1->tab[1][2] + mat->tab[0][2] * mat1->tab[2][2];
-	new.tab[1][0] = mat->tab[1][0] * mat1->tab[0][0] + mat->tab[1][1] * mat1->tab[1][0] + mat->tab[1][2] * mat1->tab[2][0];
-	new.tab[1][1] = mat->tab[1][0] * mat1->tab[0][1] + mat->tab[1][1] * mat1->tab[1][1] + mat->tab[1][2] * mat1->tab[2][0];
-	new.tab[1][2] = mat->tab[1][0] * mat1->tab[0][2] + mat->tab[1][1] * mat1->tab[1][2] + mat->tab[1][2] * mat1->tab[2][2];
-	new.tab[2][0] = mat->tab[2][0] * mat1->tab[0][0] + mat->tab[2][1] * mat1->tab[1][0] + mat->tab[2][2] * mat1->tab[2][0];
-	new.tab[2][1] = mat->tab[2][0] * mat1->tab[0][1] + mat->tab[2][1] * mat1->tab[1][1] + mat->tab[2][2] * mat1->tab[2][0];
-	new.tab[2][2] = mat->tab[2][0] * mat1->tab[0][2] + mat->tab[2][1] * mat1->tab[1][2] + mat->tab[2][2] * mat1->tab[2][2];
+	new.tab[0][0] = mat->tab[0][0] * mat1->tab[0][0] +
+	mat->tab[0][1] * mat1->tab[1][0] + mat->tab[0][2] * mat1->tab[2][0];
+	new.tab[0][1] = mat->tab[0][0] * mat1->tab[0][1] +
+	mat->tab[0][1] * mat1->tab[1][1] + mat->tab[0][2] * mat1->tab[1][2];
+	new.tab[0][2] = mat->tab[0][0] * mat1->tab[0][2] +
+	mat->tab[0][1] * mat1->tab[1][2] + mat->tab[0][2] * mat1->tab[2][2];
+	new.tab[1][0] = mat->tab[1][0] * mat1->tab[0][0] +
+	mat->tab[1][1] * mat1->tab[1][0] + mat->tab[1][2] * mat1->tab[2][0];
+	new.tab[1][1] = mat->tab[1][0] * mat1->tab[0][1] +
+	mat->tab[1][1] * mat1->tab[1][1] + mat->tab[1][2] * mat1->tab[2][0];
+	new.tab[1][2] = mat->tab[1][0] * mat1->tab[0][2] +
+	mat->tab[1][1] * mat1->tab[1][2] + mat->tab[1][2] * mat1->tab[2][2];
+	new.tab[2][0] = mat->tab[2][0] * mat1->tab[0][0] +
+	mat->tab[2][1] * mat1->tab[1][0] + mat->tab[2][2] * mat1->tab[2][0];
+	new.tab[2][1] = mat->tab[2][0] * mat1->tab[0][1] +
+	mat->tab[2][1] * mat1->tab[1][1] + mat->tab[2][2] * mat1->tab[2][0];
+	new.tab[2][2] = mat->tab[2][0] * mat1->tab[0][2] +
+	mat->tab[2][1] * mat1->tab[1][2] + mat->tab[2][2] * mat1->tab[2][2];
 	return (new);
-}
+}*/
 
-void	ft_mult_1_3(t_v3 **alst, matrice *mat)
+void		ft_mult_1_3(t_v3 **alst, t_matrice *mat)
 {
 	(*alst)->save.x = (*alst)->point.x;
 	(*alst)->save.y = (*alst)->point.y;
 	(*alst)->save.z = (*alst)->point.z;
-	(*alst)->point.x = mat->tab[0][0] * (*alst)->save.x + mat->tab[0][1] * (*alst)->save.y + mat->tab[0][2] * (*alst)->save.z;
-	(*alst)->point.y = mat->tab[1][0] * (*alst)->save.x + mat->tab[1][1] * (*alst)->save.y + mat->tab[1][2] * (*alst)->save.z;
-	(*alst)->point.z = mat->tab[2][0] * (*alst)->save.x + mat->tab[2][1] * (*alst)->save.y + mat->tab[2][2] * (*alst)->save.z;
+	(*alst)->point.x = mat->tab[0][0] * (*alst)->save.x + mat->tab[0][1] *
+		(*alst)->save.y + mat->tab[0][2] * (*alst)->save.z;
+	(*alst)->point.y = mat->tab[1][0] * (*alst)->save.x + mat->tab[1][1] *
+		(*alst)->save.y + mat->tab[1][2] * (*alst)->save.z;
+	(*alst)->point.z = mat->tab[2][0] * (*alst)->save.x + mat->tab[2][1] *
+		(*alst)->save.y + mat->tab[2][2] * (*alst)->save.z;
 }

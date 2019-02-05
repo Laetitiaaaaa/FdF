@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/01/29 13:16:17 by llejeune         ###   ########.fr        #
+#    Updated: 2019/02/04 17:34:50 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = fdf
 SRC = fdf.c \
 	  image.c \
 	  list.c \
-	  matrice.c \
+	  matrice.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -32,7 +32,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C ./libft
-	cc -g $(FLAG2) $(OBJ) libft/libft.a $(FLAG3) -o $(NAME)
+	cc -g $(FLAG2) $(OBJ) ./libft/libft.a $(FLAG3) -o $(NAME)
 
 %.o: %.c
 	gcc -g $(FLAG1) -o $@ -c $<
@@ -46,4 +46,7 @@ fclean: clean
 
 re: fclean $(NAME)
 
+me: 
+	cc -g $(FLAG2) *.c ./libft/*.c  $(FLAG3) -o $(NAME)
+	  
 .PHONY: all clean fclean re

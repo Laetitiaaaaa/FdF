@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 14:57:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/28 14:22:29 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/04 08:40:03 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ void	ft_add_node(t_v3 **alst, t_v3 *new_node)
 	if ((*alst) == NULL)
 		(*alst) = new_node;
 }
-

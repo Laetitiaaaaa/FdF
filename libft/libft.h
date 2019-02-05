@@ -6,13 +6,13 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 08:45:33 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/23 19:40:19 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/04 12:04:00 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 32
+# define BUFF_SIZE 50000
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -28,6 +28,13 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_split
+{
+	char			*str;
+	int				a;
+	int				i;
+	int				j;
+}					t_split;
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dest, const char *src);
