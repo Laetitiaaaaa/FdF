@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:01:10 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/05 17:11:22 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/06 16:10:16 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,47 +51,45 @@ void	ft_color(t_my_m *m, int z)
 	else if (a > 240 && a <= 360)
 		ft_nb_color(m, 0, (255 - ((a - 240) * 255 / 120)),
 				((a - 240) * 255 / 120));
-	else
-		ft_nb_color(m, 0, 0, 0);
 }
 
 /*void	ft_segment(t_my_m *m, int x1, int y1, int x2, int y2, int z)
-{
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	float	slope;
-	float	pitch;
+  {
+  int		dx;
+  int		dy;
+  int		sx;
+  int		sy;
+  float	slope;
+  float	pitch;
 
-	dx = x2 - x1;
-	sx = (dx < 0) ? -1 : 1;
-	dy = y2 - y1;
-	sy = (dy < 0) ? -1 : 1;
+  dx = x2 - x1;
+  sx = (dx < 0) ? -1 : 1;
+  dy = y2 - y1;
+  sy = (dy < 0) ? -1 : 1;
 
-	if (abs(dy) < abs(dx))
-	{
-		slope = (dx > 0) ? (dy / dx) : 0;
-		pitch = y1 - slope * x1;
-		while (x1 != x2)
-		{
-			ft_fill_pixel(m, x1, (slope * x1 + pitch), z);
-			x1 += sx;
-		}
-	}
-	else
-	{
-		slope = (dy < 0) ? (dx / dy) : 0;
-		pitch = x1 - slope * y1;
-		while (y1 != y2)
-		{
-			ft_fill_pixel(m, x1, (slope * y1 + pitch), z);
-			y1 += sy;
-		}
-	}
-}*/
+  if (abs(dy) < abs(dx))
+  {
+  slope = (dx > 0) ? (dy / dx) : 0;
+  pitch = y1 - slope * x1;
+  while (x1 != x2)
+  {
+  ft_fill_pixel(m, x1, (slope * x1 + pitch), z);
+  x1 += sx;
+  }
+  }
+  else
+  {
+  slope = (dy < 0) ? (dx / dy) : 0;
+  pitch = x1 - slope * y1;
+  while (y1 != y2)
+  {
+  ft_fill_pixel(m, x1, (slope * y1 + pitch), z);
+  y1 += sy;
+  }
+  }
+  }*/
 
-void	ft_segment(t_my_m *m, z)
+void	ft_segment(t_my_m *m, int x, int y, int x1, int y1, int z)
 {
 	int		dx;
 	int		dy;
@@ -105,30 +103,33 @@ void	ft_segment(t_my_m *m, z)
 	sy = (dy >= 0) ? 1 : -1;
 	dx = 2 * dx;
 	dy = 2 * dy;
-	e = dx;
-	if (dx > dy)
+	while (x < x1)
 	{
-		ft_fill_pixel(m, x, y, z);
-		e = e + dy;
-		if (e < 0)
+		if (dx > dy)
 		{
-			y += sy;
-			e = e + dx;
+			e = dx / 2;
+			ft_fill_pixel(m, x, y, z);
+			e = e + dy;
+			if (e < 0)
+			{
+				y += sy;
+				e = e + dx;
+			}
+			else
+				x += sx;
 		}
 		else
-			x += sx;
-	}
-	e = dy;
-	else if (dx < dy)
-	{
-		ft_fill_pixel(m, x, y, z);
-		e = e + dx;
-		if (e < 0)
 		{
-			x += sx;
+			e = dy / 2;
+			ft_fill_pixel(m, x, y, z);
 			e = e + dx;
+			if (e < 0)
+			{
+				x += sx;
+				e = e + dx;
+			}
+			y += sy;
 		}
-		y += sy;
 	}
 }
 
@@ -146,21 +147,32 @@ void	ft_always(t_my_m *m)
 void	ft_fill_image(t_v3 **alst, t_my_m *m)
 {
 	t_v3	*keep;
+	t_v3	*seek;
 
 	keep = (*alst);
-	if (keep != NULL)
+	while (keep->next != NULL)
 	{
-		while (keep->next != NULL)
+		seek = keep->next;
+		while (seek->next != NULL)
 		{
-	//		ft_segment(m, keep->point.x + m->offx, keep->point.y + m->offy,
-	//		keep->next->point.x, keep->next->point.y, keep->zed);
-			ft_fill_pixel(m, keep->point.x + m->offx,
-				keep->point.y + m->offy, keep->zed);
-			keep = keep->next;
+			if (seek->point.x == keep->point.x)
+			{
+				printf("keepx = %f\n", keep->point.x);
+				printf("seekx = %f\n", seek->point.x);
+				printf("keepy = %f\n", keep->point.y);
+				printf("seeky = %f\n", keep->point.y);
+				printf("\n");
+				ft_segment(m, keep->point.x + m->offx, keep->point.y + m->offy, seek->point.x + m->offx, seek->point.y + m->offy, keep->zed);
+			}
+			seek = seek->next;
 		}
-		ft_fill_pixel(m, keep->point.x + m->offx,
-				keep->point.y + m->offy, keep->zed);
+		ft_segment(m, keep->point.x + m->offx, keep->point.y + m->offy, keep->next->point.x + m->offx, keep->next->point.y + m->offy, keep->zed);
+//		ft_fill_pixel(m, keep->point.x + m->offx,
+//			keep->point.y + m->offy, keep->zed);
+		keep = keep->next;
 	}
+//	ft_fill_pixel(m, keep->point.x + m->offx,
+//			keep->point.y + m->offy, keep->zed);
 }
 
 int		ft_key(int key, t_my_m *m)

@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/02/04 17:34:50 by llejeune         ###   ########.fr        #
+#    Updated: 2019/02/06 11:43:17 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ FLAG3 = -L /usr/local/lib/ \
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): clear $(OBJ)
 	make -C ./libft
 	cc -g $(FLAG2) $(OBJ) ./libft/libft.a $(FLAG3) -o $(NAME)
 
@@ -44,9 +44,17 @@ clean:
 fclean: clean
 	rm $(NAME)
 
+
 re: fclean $(NAME)
+
+
+clear: 
+	clear
 
 me: 
 	cc -g $(FLAG2) *.c ./libft/*.c  $(FLAG3) -o $(NAME)
+
+exe:
+	./$(NAME) ./test_maps/ptecarte
 	  
 .PHONY: all clean fclean re

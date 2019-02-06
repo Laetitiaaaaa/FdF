@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/05 17:11:31 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:52:36 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_check_map(char *line)
 	i = 0;
 	while (line[i] != 0)
 	{
-		if ((line[i] > 32 && line[i] < 48) || (line[i] > 57 && line[i] < 127))
+		if ((line[i] > 46 && line[i] < 48) || line[i] == 44 || (line[i] > 32 && line[i] < 43) || (line[i] > 57 && line[i] < 127))
 			exit(0);
 		i++;
 	}
@@ -56,10 +56,10 @@ void	ft_map(int *fd, t_my_m *m)
 		while (tmp[m->i] != 0)
 		{
 			new_node = ft_new_node(new_node);
-			new_node->point.x = m->i * 10;
-			new_node->point.y = m->c * 10;
-			new_node->point.z = ft_atoi(tmp[m->i]) * 10;
-			new_node->zed = ft_atoi(tmp[m->i]);
+			new_node->point.x = m->i;
+			new_node->point.y = m->c;
+			new_node->point.z = (ft_atoi(tmp[m->i]) >= 0) ? ft_atoi(tmp[m->i]) : -(ft_atoi(tmp[m->i]));
+			new_node->zed = (ft_atoi(tmp[m->i]) >= 0) ? ft_atoi(tmp[m->i]) : -(ft_atoi(tmp[m->i]));
 			ft_add_node(&m->lst_point, new_node);
 			free(tmp[m->i]);
 			m->i++;
@@ -74,7 +74,6 @@ void	ft_map(int *fd, t_my_m *m)
 void	ft_free(t_my_m *m)
 {
 	t_v3 *keep;
-
 	while (m->lst_point != NULL)
 	{
 		keep = m->lst_point;

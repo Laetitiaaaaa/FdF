@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/05 16:22:27 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/06 11:14:09 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void				ft_nb_color(t_my_m *m, int blue, int green, int red);
 int					ft_open(char *av, t_my_m *m);
 int					ft_init_mlx(t_my_m *m);
 void				ft_free(t_my_m *m);
+void				ft_segment(t_my_m *m, int x, int y, int x1, int y1, int z);
 
 #endif
