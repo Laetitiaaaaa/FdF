@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:05:02 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/04 08:42:34 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/08 16:09:44 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		ft_zoom(t_v3 **lst_point, t_my_m *m, float i)
 		ft_mult_1_3(&keep, &m->mat);
 		keep = keep->next;
 	}
-	ft_always(m);
 }
 
 void		ft_rotation_x(float angle, t_my_m *m)
@@ -53,7 +52,6 @@ void		ft_rotation_x(float angle, t_my_m *m)
 		ft_mult_1_3(&keep, &m->rot);
 		keep = keep->next;
 	}
-	ft_always(m);
 }
 
 void		ft_rotation_y(float angle, t_my_m *m)
@@ -75,7 +73,6 @@ void		ft_rotation_y(float angle, t_my_m *m)
 		ft_mult_1_3(&keep, &m->rot);
 		keep = keep->next;
 	}
-	ft_always(m);
 }
 
 void		ft_rotation_z(float angle, t_my_m *m)
@@ -97,33 +94,7 @@ void		ft_rotation_z(float angle, t_my_m *m)
 		ft_mult_1_3(&keep, &m->rot);
 		keep = keep->next;
 	}
-	ft_always(m);
 }
-
-/*t_matrice		ft_mult_3_3(t_matrice *mat, t_matrice *mat1)
-{
-	t_matrice		new;
-
-	new.tab[0][0] = mat->tab[0][0] * mat1->tab[0][0] +
-	mat->tab[0][1] * mat1->tab[1][0] + mat->tab[0][2] * mat1->tab[2][0];
-	new.tab[0][1] = mat->tab[0][0] * mat1->tab[0][1] +
-	mat->tab[0][1] * mat1->tab[1][1] + mat->tab[0][2] * mat1->tab[1][2];
-	new.tab[0][2] = mat->tab[0][0] * mat1->tab[0][2] +
-	mat->tab[0][1] * mat1->tab[1][2] + mat->tab[0][2] * mat1->tab[2][2];
-	new.tab[1][0] = mat->tab[1][0] * mat1->tab[0][0] +
-	mat->tab[1][1] * mat1->tab[1][0] + mat->tab[1][2] * mat1->tab[2][0];
-	new.tab[1][1] = mat->tab[1][0] * mat1->tab[0][1] +
-	mat->tab[1][1] * mat1->tab[1][1] + mat->tab[1][2] * mat1->tab[2][0];
-	new.tab[1][2] = mat->tab[1][0] * mat1->tab[0][2] +
-	mat->tab[1][1] * mat1->tab[1][2] + mat->tab[1][2] * mat1->tab[2][2];
-	new.tab[2][0] = mat->tab[2][0] * mat1->tab[0][0] +
-	mat->tab[2][1] * mat1->tab[1][0] + mat->tab[2][2] * mat1->tab[2][0];
-	new.tab[2][1] = mat->tab[2][0] * mat1->tab[0][1] +
-	mat->tab[2][1] * mat1->tab[1][1] + mat->tab[2][2] * mat1->tab[2][0];
-	new.tab[2][2] = mat->tab[2][0] * mat1->tab[0][2] +
-	mat->tab[2][1] * mat1->tab[1][2] + mat->tab[2][2] * mat1->tab[2][2];
-	return (new);
-}*/
 
 void		ft_mult_1_3(t_v3 **alst, t_matrice *mat)
 {

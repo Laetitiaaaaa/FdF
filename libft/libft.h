@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 08:45:33 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/04 12:04:00 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/07 10:41:59 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstaddap(t_list **alst, t_list *new);
 int					get_next_line(const int fd, char **line);
+void				ft_get_leaks(char *prog_name, char *str);
 
 #endif

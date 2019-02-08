@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/06 14:52:36 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/08 15:42:19 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ void	ft_map(int *fd, t_my_m *m)
 			new_node = ft_new_node(new_node);
 			new_node->point.x = m->i;
 			new_node->point.y = m->c;
-			new_node->point.z = (ft_atoi(tmp[m->i]) >= 0) ? ft_atoi(tmp[m->i]) : -(ft_atoi(tmp[m->i]));
-			new_node->zed = (ft_atoi(tmp[m->i]) >= 0) ? ft_atoi(tmp[m->i]) : -(ft_atoi(tmp[m->i]));
+			new_node->point.z = (ft_atoi(tmp[m->i]) >= 0) ? ft_atoi(tmp[m->i]) : -(ft_atoi(tmp[m->i]));;
+			new_node->zed = (ft_atoi(tmp[m->i]) >= 0) ? ft_atoi(tmp[m->i]) : -(ft_atoi(tmp[m->i]));;
+			new_node->origin = new_node->point;
 			ft_add_node(&m->lst_point, new_node);
 			free(tmp[m->i]);
 			m->i++;
@@ -123,6 +124,7 @@ int		main(int ac, char **av)
 	printf("C\n");
 	mlx_hook(m.win_ptr, 2, 0, ft_key, &m);
 	printf("D\n");
+	ft_get_leaks("fdf", "end of everything");
 	mlx_loop(m.mlx_ptr);
 	printf("E\n");
 	return (0);

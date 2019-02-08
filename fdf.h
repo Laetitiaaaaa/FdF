@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/06 11:14:09 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/08 16:09:59 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@
 
 typedef struct		s_point
 {
-	float			x;
-	float			y;
-	float			z;
+	double			x;
+	double			y;
+	double			z;
 }					t_point;
 
 typedef struct		s_color
@@ -56,6 +56,7 @@ typedef struct		s_liste
 {
 	t_point			point;
 	t_point			save;
+	t_point			origin;
 	int				zed;
 	t_color			c;
 	struct s_liste	*next;

@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 10:29:12 by llejeune          #+#    #+#              #
-#    Updated: 2019/01/22 17:44:05 by llejeune         ###   ########.fr        #
+#    Updated: 2019/02/07 10:44:08 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRC = ft_atoi.c \
 	  ft_lstmap.c \
 	  ft_lstaddap.c \
 	  get_next_line.c \
+	  ft_get_leaks.c \
 
 OBJ = ft_atoi.o \
 	  ft_bzero.o \
@@ -133,6 +134,7 @@ OBJ = ft_atoi.o \
 	  ft_lstmap.o \
 	  ft_lstaddap.o \
 	  get_next_line.o \
+	  ft_get_leaks.o \
 
 all: $(NAME)
 
