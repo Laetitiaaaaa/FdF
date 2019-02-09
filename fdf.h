@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/08 16:09:59 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/09 10:07:43 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,16 @@ typedef struct		s_general
 	int				offx;
 	int				offy;
 	int				fd;
+	char			**tmp;
+	int				x;
+	int				y;
+	int				x1;
+	int				y1;
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	int				e;
 }					t_my_m;
 
 t_v3				*ft_new_node(t_v3 *new_node);
@@ -107,6 +117,6 @@ void				ft_nb_color(t_my_m *m, int blue, int green, int red);
 int					ft_open(char *av, t_my_m *m);
 int					ft_init_mlx(t_my_m *m);
 void				ft_free(t_my_m *m);
-void				ft_segment(t_my_m *m, int x, int y, int x1, int y1, int z);
+void				ft_segment(t_my_m *m, t_v3 **alst, t_v3 **next, int z);
 
 #endif
