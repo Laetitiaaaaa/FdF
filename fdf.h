@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/10 17:41:42 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/10 18:43:20 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ int					ft_open(char *av, t_my_m *m);
 int					ft_init_mlx(t_my_m *m);
 void				ft_free(t_my_m *m);
 void				ft_segment(t_my_m *m, t_v3 **alst, t_v3 **next, int z);
-void				ft_perspective(/*int d, */t_my_m *m);
+void				ft_perspective(t_my_m *m);
 
 #endif
