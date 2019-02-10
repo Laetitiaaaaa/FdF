@@ -6,14 +6,14 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/09 10:07:43 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/10 17:41:42 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # define ESC 53
-# define P 69
+# define PLUS 69
 # define M 78
 # define F_H 126
 # define F_B 125
@@ -29,6 +29,7 @@
 # define THREE 85
 # define NINE 92
 # define ONE 83
+# define P 35
 # define M_L 1200
 # define M_H 800
 
@@ -102,7 +103,7 @@ t_v3				*ft_new_node(t_v3 *new_node);
 void				ft_add_node(t_v3 **alst, t_v3 *new_node);
 void				ft_map(int *fd, t_my_m *m);
 void				ft_fill_pixel(t_my_m *m, int x, int y, int z);
-void				ft_fill_image(t_v3 **alst, t_my_m *m);
+void				ft_fill_image(t_my_m *m);
 int					ft_key(int key, t_my_m *m);
 void				ft_zoom(t_v3 **lst_point, t_my_m *m, float i);
 void				ft_always(t_my_m *m);
@@ -118,5 +119,6 @@ int					ft_open(char *av, t_my_m *m);
 int					ft_init_mlx(t_my_m *m);
 void				ft_free(t_my_m *m);
 void				ft_segment(t_my_m *m, t_v3 **alst, t_v3 **next, int z);
+void				ft_perspective(/*int d, */t_my_m *m);
 
 #endif

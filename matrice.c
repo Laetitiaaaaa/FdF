@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:05:02 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/08 16:09:44 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/10 16:47:43 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,19 @@ void		ft_rotation_z(float angle, t_my_m *m)
 	while (keep != NULL)
 	{
 		ft_mult_1_3(&keep, &m->rot);
+		keep = keep->next;
+	}
+}
+
+void		ft_perspective(/*int d, */t_my_m *m)
+{
+	t_v3	*keep;
+
+	keep = m->lst_point;
+	while (keep != NULL)
+	{
+		keep->point.x = (keep->point.z != 0) ? (keep->point.x / keep->point.z) : keep->point.x;
+		keep->point.y = (keep->point.z != 0) ? (keep->point.y / keep->point.z) : keep->point.y;
 		keep = keep->next;
 	}
 }

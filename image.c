@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:01:10 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/09 12:20:02 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/10 18:24:05 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void	ft_color(t_my_m *m, int z)
 
 	i = ft_zmax(m);
 	m->lst_point->c.alpha = 0;
-	if (z >= 0 && z <= (i / 7))
+	if (z < 0)
+		ft_nb_color(m, 229, 9, 22);
+	else if (z >= 0 && z <= (i / 7))
 		ft_nb_color(m, 51, 51, 255);
 	else if (z > (i / 7) && z <= 2 * (i / 7))
 		ft_nb_color(m, 51, 144, 255);
@@ -122,17 +124,17 @@ void	ft_always(t_my_m *m)
 	i = 0;
 	while (i < (m->l * m->h * 4))
 		m->str[i++] = 0;
-	ft_fill_image(&m->lst_point, m);
+	ft_fill_image(m);
 	if (!(mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->img_ptr, 0, 0)))
 		ft_free(m);
 }
 
-void	ft_fill_image(t_v3 **alst, t_my_m *m)
+void	ft_fill_image(t_my_m *m)
 {
 	t_v3	*keep;
 	t_v3	*seek;
 
-	keep = (*alst);
+	keep = m->lst_point;
 	while (keep->next != NULL)
 	{
 		seek = keep->next;
@@ -154,7 +156,7 @@ void	ft_fill_image(t_v3 **alst, t_my_m *m)
 
 int		ft_key(int key, t_my_m *m)
 {
-	(key == P) ? ft_zoom(&m->lst_point, m, 2) : 0;
+	(key == PLUS) ? ft_zoom(&m->lst_point, m, 2) : 0;
 	(key == M) ? ft_zoom(&m->lst_point, m, 0.5) : 0;
 	(key == F_H) ? (m->offy -= 10) : 0;
 	(key == F_B) ? (m->offy += 10) : 0;
@@ -166,6 +168,7 @@ int		ft_key(int key, t_my_m *m)
 	(key == SIX) ? ft_rotation_y(-10, m) : 0;
 	(key == ONE) ? ft_rotation_z(10, m) : 0;
 	(key == THREE) ? ft_rotation_z(-10, m) : 0;
+	(key == P) ? ft_perspective(m) : 0;
 	(key == ESC) ? ft_free(m) : 0;
 	ft_always(m);
 	return (1);

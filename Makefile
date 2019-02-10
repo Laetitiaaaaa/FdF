@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/02/09 12:21:19 by llejeune         ###   ########.fr        #
+#    Updated: 2019/02/10 17:38:28 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = fdf.c \
 
 OBJ = $(SRC:.c=.o)
 
-FLAG1 = -Wall -Wextra -Werror #-g -fsanitize=address
+FLAG1 = -Wall -Wextra -Werror -g -fsanitize=address
 
 INCLUDES = -I ./
 

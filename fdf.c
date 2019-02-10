@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/09 13:25:01 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/10 17:26:04 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	ft_check_map(char *line)
 	{
 		if ((line[i] > 46 && line[i] < 48) || line[i] == 44 || (line[i] > 32 &&
 					line[i] < 43) || (line[i] > 57 && line[i] < 127))
+		{
+			free(line);
 			exit(0);
+		}
 		i++;
 	}
 }
@@ -47,8 +50,7 @@ void	ft_init_map(t_v3 **alst, t_my_m *m)
 	(*alst)->point.x = m->i;
 	(*alst)->point.y = m->c;
 	(*alst)->point.z = ft_atoi(m->tmp[m->i]);
-	(*alst)->zed = (ft_atoi(m->tmp[m->i]) >= 0) ? ft_atoi(m->tmp[m->i])
-		: -(ft_atoi(m->tmp[m->i]));
+	(*alst)->zed = ft_atoi(m->tmp[m->i]);
 	(*alst)->origin = (*alst)->point;
 }
 
@@ -60,7 +62,6 @@ void	ft_map(int *fd, t_my_m *m)
 	m->c = 0;
 	while (get_next_line(*fd, &line) > 0)
 	{
-		ft_check_map(line);
 		if (!(m->tmp = ft_strsplit(line, ' ')))
 			ft_free(m);
 		m->i = 0;
@@ -105,6 +106,7 @@ int		ft_is_empty(char *av)
 	while (get_next_line(fd, &line) > 0)
 	{
 		c++;
+		ft_check_map(line);
 		free(line);
 	}
 	free(line);
