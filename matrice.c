@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:05:02 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/11 10:49:08 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/11 13:15:38 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,45 +96,6 @@ void		ft_rotation_z(float angle, t_my_m *m)
 	}
 }
 
-void		ft_perspective(t_my_m *m)
-{
-	t_v3	*keep;
-
-	keep = m->lst_point;
-	while (keep != NULL)
-	{
-		keep->point.x = (keep->origin.z != 0) ? (keep->origin.x / keep->origin.z)
-			: keep->origin.x;
-		keep->point.y = (keep->origin.z != 0) ? (keep->origin.y / keep->origin.z)
-			: keep->origin.y;
-		keep = keep->next;
-	}
-}
-
-t_matrice		ft_mult_3_3(t_matrice *mat, t_matrice *mat1)
-{
-	t_matrice		new;
-
-	new.tab[0][0] = mat->tab[0][0] * mat1->tab[0][0] +
-	mat->tab[0][1] * mat1->tab[1][0] + mat->tab[0][2] * mat1->tab[2][0];
-	new.tab[0][1] = mat->tab[0][0] * mat1->tab[0][1] +
-	mat->tab[0][1] * mat1->tab[1][1] + mat->tab[0][2] * mat1->tab[1][2];
-	new.tab[0][2] = mat->tab[0][0] * mat1->tab[0][2] +
-	mat->tab[0][1] * mat1->tab[1][2] + mat->tab[0][2] * mat1->tab[2][2];
-	new.tab[1][0] = mat->tab[1][0] * mat1->tab[0][0] +
-	mat->tab[1][1] * mat1->tab[1][0] + mat->tab[1][2] * mat1->tab[2][0];
-	new.tab[1][1] = mat->tab[1][0] * mat1->tab[0][1] +
-	mat->tab[1][1] * mat1->tab[1][1] + mat->tab[1][2] * mat1->tab[2][0];
-	new.tab[1][2] = mat->tab[1][0] * mat1->tab[0][2] +
-	mat->tab[1][1] * mat1->tab[1][2] + mat->tab[1][2] * mat1->tab[2][2];
-	new.tab[2][0] = mat->tab[2][0] * mat1->tab[0][0] +
-	mat->tab[2][1] * mat1->tab[1][0] + mat->tab[2][2] * mat1->tab[2][0];
-	new.tab[2][1] = mat->tab[2][0] * mat1->tab[0][1] +
-	mat->tab[2][1] * mat1->tab[1][1] + mat->tab[2][2] * mat1->tab[2][0];
-	new.tab[2][2] = mat->tab[2][0] * mat1->tab[0][2] +
-	mat->tab[2][1] * mat1->tab[1][2] + mat->tab[2][2] * mat1->tab[2][2];
-	return (new);
-}
 void		ft_mult_1_3(t_v3 **alst, t_matrice *mat)
 {
 	(*alst)->save.x = (*alst)->point.x;

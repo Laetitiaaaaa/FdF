@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/11 11:22:54 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/11 15:17:49 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ typedef struct		s_general
 	int				c;
 	t_v3			*lst_point;
 	t_matrice		mat;
-	t_matrice		rot;
 	t_matrice		rotx;
 	t_matrice		roty;
 	t_matrice		rotz;
@@ -100,7 +99,7 @@ typedef struct		s_general
 	int				sx;
 	int				sy;
 	int				e;
-	int				a;
+	t_v3			*seek;
 }					t_my_m;
 
 t_v3				*ft_new_node(t_v3 *new_node);
@@ -112,7 +111,6 @@ int					ft_key(int key, t_my_m *m);
 void				ft_zoom(t_v3 **lst_point, t_my_m *m, float i);
 void				ft_always(t_my_m *m);
 void				ft_mult_1_3(t_v3 **alst, t_matrice *mat);
-t_matrice			ft_mult_3_3(t_matrice *mat, t_matrice *mat1);
 void				ft_color(t_my_m *m, int z);
 void				ft_rotation_x(float angle, t_my_m *m);
 void				ft_rotation_y(float angle, t_my_m *m);
@@ -124,5 +122,10 @@ int					ft_init_mlx(t_my_m *m);
 void				ft_free(t_my_m *m);
 void				ft_segment(t_my_m *m, t_v3 **alst, t_v3 **next, int z);
 void				ft_perspective(t_my_m *m);
+void				ft_init_bress(t_my_m *m, t_v3 **alst, t_v3 **next);
+void				ft_bress_x(t_my_m *m, int z);
+void				ft_bress_y(t_my_m *m, int z);
+int					ft_check_map(char *line);
+void				ft_init_map(t_v3 **alst, t_my_m *m);
 
 #endif

@@ -6,20 +6,22 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/02/11 10:32:10 by llejeune         ###   ########.fr        #
+#    Updated: 2019/02/11 14:19:38 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = fdf.c \
+SRC = bresenham.c \
+	  file_util.c \
 	  image.c \
-	  list.c \
-	  matrice.c 
+	  main.c \
+	  map.c \
+	  matrice.c \
 
 OBJ = $(SRC:.c=.o)
 
-FLAG1 = -Wall -Wextra -Werror -g -fsanitize=address
+FLAG1 = -Wall -Wextra -Werror #-g -fsanitize=address
 
 INCLUDES = -I ./
 
