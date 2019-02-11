@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/11 15:17:49 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/11 18:29:46 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # include <mlx.h>
 # include <math.h>
 # include "libft/libft.h"
-# include <stdio.h>
 
 typedef struct		s_point
 {

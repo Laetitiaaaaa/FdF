@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/02/11 14:19:38 by llejeune         ###   ########.fr        #
+#    Updated: 2019/02/11 18:30:36 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = bresenham.c \
 
 OBJ = $(SRC:.c=.o)
 
-FLAG1 = -Wall -Wextra -Werror #-g -fsanitize=address
+FLAG1 = -Wall -Wextra -Werror
 
 INCLUDES = -I ./
 
@@ -46,17 +46,9 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-
 re: fclean $(NAME)
-
 
 clear: 
 	clear
-
-me: 
-	cc -g $(FLAG2) *.c ./libft/*.c  $(FLAG3) -o $(NAME)
-
-exe:
-	./$(NAME) ./test_maps/ptecarte
 	  
 .PHONY: all clean fclean re
