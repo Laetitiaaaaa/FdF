@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 16:03:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/10 17:26:04 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/11 11:22:53 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ void	ft_check_map(char *line)
 	i = 0;
 	while (line[i] != 0)
 	{
-		if ((line[i] > 46 && line[i] < 48) || line[i] == 44 || (line[i] > 32 &&
-					line[i] < 43) || (line[i] > 57 && line[i] < 127))
+		if ((line[i] > 45 && line[i] < 48) || line[i] == 44 || (line[i] > 32 &&
+					line[i] < 43) || (line[i] > 57 && line[i] <= 127) ||
+				(line[i] >= 0 && line[i] < 32))
 		{
 			free(line);
 			exit(0);
@@ -62,7 +63,7 @@ void	ft_map(int *fd, t_my_m *m)
 	m->c = 0;
 	while (get_next_line(*fd, &line) > 0)
 	{
-		if (!(m->tmp = ft_strsplit(line, ' ')))
+		if (!(m->tmp = ft_strsplit(line, ' ')) || ft_strlen(line) == 0)
 			ft_free(m);
 		m->i = 0;
 		while (m->tmp[m->i] != 0)
@@ -95,31 +96,10 @@ void	ft_free(t_my_m *m)
 	exit(0);
 }
 
-int		ft_is_empty(char *av)
-{
-	int		c;
-	int		fd;
-	char	*line;
-
-	c = 0;
-	fd = open(av, O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
-	{
-		c++;
-		ft_check_map(line);
-		free(line);
-	}
-	free(line);
-	close(fd);
-	if (c == 0)
-		return (1);
-	return (0);
-}
-
 int		ft_open(char *av, t_my_m *m)
 {
 	m->fd = open(av, O_RDONLY);
-	if (m->fd < 0 || ft_is_empty(av) == 1)
+	if (m->fd < 0/* || ft_is_empty(av) == 1*/)
 		return (1);
 	return (0);
 }
@@ -132,6 +112,7 @@ int		ft_init_mlx(t_my_m *m)
 		return (1);
 	m->offx = 0;
 	m->offy = 0;
+	m->a = 0;
 	m->lst_point = NULL;
 	if (!(m->mlx_ptr = mlx_init()))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:01:10 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/10 18:39:28 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/11 11:27:45 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_fill_pixel(t_my_m *m, int x, int y, int z)
 	ft_color(m, z);
 	pixel = 4 * (x + (m->l * y));
 	if (x < m->l && x >= 0 && y < m->h && y >= 0 &&
-			pixel < (4 * m->l * m->h) && pixel > 0)
+			pixel < (4 * m->l * m->h) && pixel >= 0)
 	{
 		((unsigned char*)m->str)[pixel] = m->lst_point->c.blue;
 		((unsigned char*)m->str)[pixel + 1] = m->lst_point->c.green;
@@ -135,6 +135,8 @@ void	ft_fill_image(t_my_m *m)
 	t_v3	*seek;
 
 	keep = m->lst_point;
+	if (keep == NULL)
+		ft_free(m);
 	while (keep->next != NULL)
 	{
 		seek = keep->next;

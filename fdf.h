@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/10 18:43:20 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/11 11:22:54 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ typedef struct		s_general
 	t_v3			*lst_point;
 	t_matrice		mat;
 	t_matrice		rot;
+	t_matrice		rotx;
+	t_matrice		roty;
+	t_matrice		rotz;
 	int				offx;
 	int				offy;
 	int				fd;
@@ -97,6 +100,7 @@ typedef struct		s_general
 	int				sx;
 	int				sy;
 	int				e;
+	int				a;
 }					t_my_m;
 
 t_v3				*ft_new_node(t_v3 *new_node);
