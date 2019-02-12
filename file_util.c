@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:07:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/12 08:57:32 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/12 14:58:53 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	ft_perspective(t_my_m *m)
 	{
 		keep->point.x = keep->origin.x + 0.71 * keep->origin.z;
 		keep->point.y = keep->origin.y + 0.71 * keep->origin.z;
+		keep->point.z = keep->origin.z;
 		keep = keep->next;
 	}
 }
