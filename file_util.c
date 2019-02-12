@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:07:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/11 15:15:18 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/12 08:57:32 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_add_node(t_v3 **alst, t_v3 *new_node)
 		(*alst) = new_node;
 }
 
-void		ft_perspective(t_my_m *m)
+void	ft_perspective(t_my_m *m)
 {
 	t_v3	*keep;
 
