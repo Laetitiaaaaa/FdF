@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:10:46 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/11 15:34:22 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/12 17:05:58 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_open(char *av, t_my_m *m)
 {
 	m->fd = open(av, O_RDONLY);
-	if (m->fd < 0)
+	if (m->fd < 0 || m->fd == 3)
 		return (1);
 	return (0);
 }
