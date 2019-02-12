@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:01:10 by llejeune          #+#    #+#             */
-/*   Updated: 2019/02/11 15:36:13 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/02/12 08:50:29 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_fill_image(t_my_m *m)
 	keep = m->lst_point;
 	if (keep == NULL)
 	{
-		printf("File is empty.\n");
+		ft_putstr("File is empty.\n");
 		ft_free(m);
 	}
 	while (keep->next != NULL)
