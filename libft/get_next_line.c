@@ -5,99 +5,123 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/12 16:12:53 by llejeune          #+#    #+#             */
-/*   Updated: 2019/01/23 15:49:34 by llejeune         ###   ########.fr       */
+/*   Created: 2019/03/04 16:18:30 by llejeune          #+#    #+#             */
+/*   Updated: 2019/03/04 16:18:36 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		sizeline(char *tmp)
+ssize_t			read_and_stock(const int fd, char **end)
 {
-	int	i;
-	int size;
+	ssize_t			ret;
+	char			buf[BUFF_SIZE + 1];
+	char			*temp;
 
-	i = 0;
-	size = 0;
-	while (tmp[i++] != '\n')
-		size++;
-	return (size);
-}
-
-static int		line_no_eof(char **tmp, char **line)
-{
-	char	*str;
-
-	if ((*tmp)[0] == '\n')
-		*line = ft_strnew(0);
-	else
-		*line = ft_strsub(*tmp, 0, sizeline(*tmp));
-	str = *tmp;
-	*tmp = ft_strdup(ft_strchr(str, '\n') + 1);
-	free(str);
-	return (1);
-}
-
-static int		eof(char **tmp, char **line)
-{
-	char	*str;
-
-	if (ft_strlen(*tmp) == 0)
+	temp = NULL;
+	ret = read(fd, buf, BUFF_SIZE);
+	if ((ret == -1) || (ret == 0))
+		return (ret);
+	buf[ret] = 0;
+	if (*end == NULL)
 	{
-		*line = NULL;
-		free(*tmp);
-		*tmp = NULL;
+		if ((*end = ft_strdup(buf)) == NULL)
+			return (-1);
+	}
+	else
+	{
+		if ((temp = ft_strjoin(*end, buf)) == NULL)
+			return (-1);
+		free(*end);
+		*end = temp;
+	}
+	return (ret);
+}
+
+char			*copy_line(const char *str)
+{
+	size_t			x;
+	char			*stock;
+
+	x = 0;
+	while ((str[x] != 0) && (str[x] != '\n'))
+	{
+		x++;
+	}
+	stock = (char*)malloc(sizeof(char) * (x + 2));
+	if (stock == NULL)
 		return (0);
-	}
-	if (ft_strchr(*tmp, '\n') == NULL)
+	x = 0;
+	while ((str[x] != 0) && (str[x] != '\n'))
 	{
-		*line = ft_strdup(*tmp);
-		*tmp = ft_strnew(0);
+		stock[x] = str[x];
+		x++;
 	}
-	else
-	{
-		*line = ft_strsub(*tmp, 0, sizeline(*tmp));
-		str = *tmp;
-		*tmp = ft_strdup(ft_strchr(str, '\n') + 1);
-		free(str);
-	}
+	stock[x] = '\0';
+	return (stock);
+}
+
+int				renew_end(char **line, char **end)
+{
+	char			*temp;
+
+	*line = copy_line(*end);
+	if (*line == NULL)
+		return (-1);
+	temp = ft_strdup(ft_strchr(*end, '\n') + 1);
+	if (temp == NULL)
+		return (-1);
+	free(*end);
+	*end = temp;
 	return (1);
 }
 
-static void		lecture(char **buf, char **tmp)
+char			**get_pend(int fd)
 {
-	char	*str;
+	static t_list	*elems = NULL;
+	t_list			*p;
+	t_fd_buf		data;
 
-	str = *tmp;
-	*tmp = ft_strjoin(str, *buf);
-	free(str);
+	p = elems;
+	while (p)
+	{
+		if (((t_fd_buf*)p->content)->fd == fd)
+			return (&((t_fd_buf*)p->content)->end);
+		p = p->next;
+	}
+	data.fd = fd;
+	data.end = NULL;
+	p = ft_lstnew(&data, sizeof(data));
+	if (p == NULL)
+		return (0);
+	ft_lstadd(&elems, p);
+	return (&((t_fd_buf*)elems->content)->end);
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	int			ret;
-	int			res;
-	char		*buf;
-	static char	*tmp = NULL;
+	int				ret;
+	char			**end;
 
-	if ((!(buf = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-			|| fd < 0 || BUFF_SIZE <= 0)
+	if (BUFF_SIZE < 1 || line == 0 || fd < 0 || (!(end = get_pend(fd))))
 		return (-1);
-	ret = BUFF_SIZE;
-	if (tmp == NULL)
-		tmp = ft_strnew(0);
-	while (ft_strchr(tmp, '\n') == NULL && ret == BUFF_SIZE)
+	while ((*end == NULL) || (ft_strchr(*end, '\n') == NULL))
 	{
-		ret = read(fd, buf, BUFF_SIZE);
-		if (ret == -1)
-			return (-1);
-		buf[ret] = 0;
-		lecture(&buf, &tmp);
+		ret = read_and_stock(fd, end);
+		if ((ret == -1) || ((ret == 0) && (*end == NULL)))
+			return (ret);
+		if (ret == 0)
+		{
+			if ((*end)[0] == '\0')
+			{
+				free(*end);
+				*end = NULL;
+				return (0);
+			}
+			*line = *end;
+			*end = NULL;
+			return (1);
+		}
 	}
-	if (ft_strchr(tmp, '\n') != NULL && ret == BUFF_SIZE)
-		res = line_no_eof(&tmp, line);
-	if (ret < BUFF_SIZE)
-		res = eof(&tmp, line);
-	free(buf);
-	return (res);
+	return (renew_end(line, end));
 }
