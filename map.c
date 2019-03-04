@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:10:46 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 17:38:09 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/04 18:47:29 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,16 @@ void	ft_init_map(t_v3 **alst, t_my_m *m)
 	(*alst)->origin = (*alst)->point;
 }
 
+int		ft_space(char *line)
+{
+	if (ft_strlen(line) == 0)
+	{
+		ft_putstr("Wrong file.\n");
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_map(int *fd, t_my_m *m)
 {
 	char	*line;
@@ -78,7 +88,8 @@ void	ft_map(int *fd, t_my_m *m)
 	m->c = 0;
 	while (get_next_line(*fd, &line) > 0)
 	{
-		if (!(m->tmp = ft_strsplit(line, ' ')) || ft_check_map(line) == 1)
+		if (!(m->tmp = ft_strsplit(line, ' ')) || ft_check_map(line) == 1
+				|| ft_space(line) == 1)
 			ft_free(m);
 		m->i = 0;
 		while (m->tmp[m->i] != 0)
