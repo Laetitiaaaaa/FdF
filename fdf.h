@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 17:47:55 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 16:32:52 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/04 18:50:51 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ void				ft_bress_x(t_my_m *m, int z);
 void				ft_bress_y(t_my_m *m, int z);
 int					ft_check_map(char *line);
 void				ft_init_map(t_v3 **alst, t_my_m *m);
+int					ft_space(char *line);
 
 #endif

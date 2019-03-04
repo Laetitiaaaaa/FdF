@@ -6,12 +6,32 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:08:57 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 13:17:53 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/04 18:53:29 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int		ft_init_mlx(t_my_m *m)
+{
+	m->l = M_L;
+	m->h = M_H;
+	if (m->l < 0 || m->h < 0)
+		return (1);
+	m->offx = 0;
+	m->offy = 0;
+	m->lst_point = NULL;
+	if (!(m->mlx_ptr = mlx_init()))
+		return (1);
+	if (!(m->win_ptr = mlx_new_window(m->mlx_ptr, m->l, m->h, "FdF")))
+		return (1);
+	if (!(m->img_ptr = mlx_new_image(m->mlx_ptr, m->l, m->h)))
+		return (1);
+	if (!(m->str = mlx_get_data_addr(m->img_ptr, &(m->bpp),
+					&(m->s_l), &(m->endian))))
+		return (1);
+	return (0);
+}
 void	ft_always(t_my_m *m)
 {
 	int		i;

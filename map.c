@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:10:46 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 18:47:29 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/04 18:52:51 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,6 @@ int		ft_open(char *av, t_my_m *m)
 {
 	m->fd = open(av, O_RDONLY);
 	if (m->fd < 0)
-		return (1);
-	return (0);
-}
-
-int		ft_init_mlx(t_my_m *m)
-{
-	m->l = M_L;
-	m->h = M_H;
-	if (m->l < 0 || m->h < 0)
-		return (1);
-	m->offx = 0;
-	m->offy = 0;
-	m->lst_point = NULL;
-	if (!(m->mlx_ptr = mlx_init()))
-		return (1);
-	if (!(m->win_ptr = mlx_new_window(m->mlx_ptr, m->l, m->h, "FdF")))
-		return (1);
-	if (!(m->img_ptr = mlx_new_image(m->mlx_ptr, m->l, m->h)))
-		return (1);
-	if (!(m->str = mlx_get_data_addr(m->img_ptr, &(m->bpp),
-					&(m->s_l), &(m->endian))))
 		return (1);
 	return (0);
 }
