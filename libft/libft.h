@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 08:45:33 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 16:19:52 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:28:49 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <fcntl.h>
-
-typedef struct		s_fd_buf
-{
-	int				fd;
-	char			*end;
-}					t_fd_buf;
 
 typedef struct		s_list
 {

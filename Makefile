@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/03/04 13:47:00 by llejeune         ###   ########.fr        #
+#    Updated: 2019/03/04 18:40:41 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ FLAG3 = -L /usr/local/lib/ \
 
 all: $(NAME)
 
-$(NAME): clear $(OBJ)
+$(NAME): $(OBJ)
 	make -C ./libft
 	cc $(FLAG1) $(INCLUDES) $(OBJ) ./libft/libft.a $(FLAG3) -o $(NAME)
 
@@ -47,8 +47,5 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean $(NAME)
-
-clear: 
-	clear
 	  
 .PHONY: all clean fclean re
