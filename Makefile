@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 15:32:45 by llejeune          #+#    #+#              #
-#    Updated: 2019/02/11 18:30:36 by llejeune         ###   ########.fr        #
+#    Updated: 2019/03/04 12:55:48 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = bresenham.c \
 
 OBJ = $(SRC:.c=.o)
 
-FLAG1 = -Wall -Wextra -Werror
+FLAG1 = -Wall -Wextra -Werror #-g -fsanitize=address
 
 INCLUDES = -I ./
 
