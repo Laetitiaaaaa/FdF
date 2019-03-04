@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 15:01:10 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 13:17:54 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/04 13:54:21 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_fill_pixel(t_my_m *m, int x, int y, int z)
 
 	ft_color(m, z);
 	pixel = 4 * (x + (m->l * y));
-	if (x < m->l && x >= 0 && y < m->h && y >= 0 &&
-			pixel < (4 * m->l * m->h) && pixel >= 0)
+	if (x < m->l && x >= 0 && y < m->h && y >= 0
+			&& pixel < (4 * m->l * m->h) && pixel >= 0)
 	{
 		((unsigned char*)m->str)[pixel] = m->lst_point->c.blue;
 		((unsigned char*)m->str)[pixel + 1] = m->lst_point->c.green;
@@ -91,8 +91,8 @@ void	ft_fill_image(t_my_m *m)
 		while (m->seek != NULL)
 		{
 			if ((m->seek->origin.x == keep->origin.x && m->seek->origin.y ==
-				(keep->origin.y + 1)) || (m->seek->origin.y == keep->origin.y &&
-					m->seek == keep->next))
+				(keep->origin.y + 1)) || (m->seek->origin.y == keep->origin.y
+					&& m->seek == keep->next))
 				ft_segment(m, &keep, &m->seek, keep->zed);
 			m->seek = m->seek->next;
 		}

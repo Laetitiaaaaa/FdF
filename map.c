@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:10:46 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 13:17:52 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/04 13:53:24 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		ft_check_map(char *line)
 	while (line[i] != 0)
 	{
 		if ((line[i] > 45 && line[i] < 48) || line[i] == 44 || (line[i] > 32
-					&& line[i] < 43) || (line[i] > 57 && line[i] <= 127) ||
-				(line[i] >= 0 && line[i] < 32))
+					&& line[i] < 43) || (line[i] > 57 && line[i] <= 127)
+				|| (line[i] >= 0 && line[i] < 32))
 		{
 			free(line);
 			ft_putstr("Invalid character.\n");
