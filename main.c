@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:08:57 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/04 18:53:29 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/05 10:48:43 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ft_init_mlx(t_my_m *m)
 		return (1);
 	return (0);
 }
+
 void	ft_always(t_my_m *m)
 {
 	int		i;
